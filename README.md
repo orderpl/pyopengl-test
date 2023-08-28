@@ -1,2 +1,2 @@
-# pyopengl-test
-Cool stuff here
+# Dumb guy learns PyOpenGL
+cool stuff here
