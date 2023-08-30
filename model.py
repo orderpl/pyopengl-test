@@ -1,5 +1,3 @@
-import moderngl as mgl
-import numpy as np
 import glm
 
 
@@ -31,7 +29,6 @@ class BaseModel:
         return m_model
 
     def render(self):
-        self.update()
         self.vao.render()
 
 
@@ -45,13 +42,6 @@ class ExtendedBaseModel(BaseModel):
         self.program['camPos'].write(self.camera.pos)
         self.program['m_view'].write(self.camera.m_view)
         self.program['m_model'].write(self.m_model)
-
-    def update_shadow(self):
-        self.shadow_program['m_model'].write(self.m_model)
-
-    def render_shadow(self):
-        self.update_shadow()
-        self.shadow_vao.render()
 
     def on_init(self):
         # texture
@@ -70,5 +60,12 @@ class ExtendedBaseModel(BaseModel):
 
 
 class Cube(ExtendedBaseModel):
-    def __init__(self, app, vao_name='cube', tex_id=0, pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
+    def __init__(self, app, vao_name='cube', tex_id=2, pos=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
         super().__init__(app, vao_name, tex_id, pos, rot, scale)
+        self.rot_vector = glm.vec3(0.01, 0.01, 0.01)
+        
+    def update(self):
+        # self.rot += self.rot_vector
+        # self.m_model = self.get_model_matrix()
+        
+        return super().update()

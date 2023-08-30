@@ -7,6 +7,8 @@ from model import *
 from camera import Camera
 from light import Light
 from mesh import Mesh
+from scene import Scene
+
 
 class GraphicsEngine(object):
     def __init__(self, win_resolution:tuple[int, int]):
@@ -27,10 +29,11 @@ class GraphicsEngine(object):
         
         self.camera = Camera(self)
         
-        self.light = Light((3, 3, -3))
+        self.light = Light((0, 3, 0))
         
         self.mesh = Mesh(self)
-        self.scene = Cube(self)
+        self.scene = Scene(self)
+        
         
     def check_events(self):
         for event in pg.event.get():
